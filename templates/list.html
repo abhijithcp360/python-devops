@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Todo APP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center">To Do App</h2>
+  
+  <form method="POST" action="/add">
+    <div class="form-group">
+      <label for="todoTitle">Todo Title</label>
+      <input type="text" class="form-control" id="todoTitle" name="title" placeholder="Enter Todo Title">
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form> 
+  <hr/>           
+  {% for todo in todo_list %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ todo.title }}</h5>
+
+        {% if todo.complete %}
+          <span class="badge badge-success">Completed</span>
+          <a href="/edit/{{todo.id}}" class="card-link">Mark as not completed</a>
+
+        {% else %}
+          <span class="badge badge-secondary">Not Completed</span>
+          <a href="/edit/{{todo.id}}" class="card-link">Mark as completed</a>
+        {% endif %}
+        <a href="/delete/{{todo.id}}" class="card-link">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>
